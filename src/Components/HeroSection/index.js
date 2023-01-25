@@ -1,6 +1,14 @@
 import React from 'react'
+import {useNavigate} from 'react-router-dom'
 
 const HeroSection = () => {
+  const navigateTo = useNavigate()
+  function routeToSignIn(e) {
+    if(e.target.name=='freelancer')
+      navigateTo('/freelancer-signin')
+    else 
+      navigateTo('/client-signin')
+  }
   return (
     <div className='hero-container'>
         <h2 className='heading'>Hire the best freelancers for any job, Online.</h2>
@@ -10,8 +18,8 @@ const HeroSection = () => {
             <li>Save up to 90% & get quotes for free</li>
             <li>Pay only when you're 100% happy</li>
         </ul>
-        <button className='btn-x'>Hire a Freelancer</button>
-        <button className='btn-y'>Earn Money Freelancing</button>
+        <button name='client' className='btn-x' onClick={routeToSignIn}>Hire a Freelancer</button>
+        <button name='freelancer' className='btn-y' onClick={routeToSignIn}>Earn Money Freelancing</button>
     </div>
   )
 }

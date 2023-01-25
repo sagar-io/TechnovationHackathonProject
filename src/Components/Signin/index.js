@@ -1,18 +1,40 @@
 import React, {useState} from 'react'
-import {SignupLink} from '../Signup'
-// import ForgetPasswordLink from './'
+import {ClientSignupLink} from '../Signup/Client'
+import {FreelancerSignupLink} from '../Signup/Freelancer'
 
-const SigninPage = () => (
-    <div className='sign-in-page-container'>
-        <div className='sign-in-page-left'>
-         <SigninForm />
-          {/* <ForgetPasswordLink /> */}
-        </div>
-        <div className='sign-in-page-right'>   
-          <SignupLink />
-        </div>
-    </div>
+
+const FreelancerSignin = () => (
+  <div className='freelancer-sign-in-page-container'>
+   <div className='sign-in-page-left'>
+    <SigninForm />
+   </div>
+   <div className='sign-in-page-right'>   
+    <FreelancerSignupLink />
+   </div>
+</div>
 )
+const ClientSignin = () => (
+  <div className='client-sign-in-page-container'>
+   <div className='sign-in-page-left'>
+    <SigninForm />
+   </div>
+   <div className='sign-in-page-right'>   
+    <ClientSignupLink />
+   </div>
+</div>
+)
+
+// const SigninPage = () => (
+//     <div className='sign-in-page-container'>
+//         <div className='sign-in-page-left'>
+//          <SigninForm />
+//           {/* <ForgetPasswordLink /> */}
+//         </div>
+//         <div className='sign-in-page-right'>   
+//           <SignupLink />
+//         </div>
+//     </div>
+// )
 
 const SigninForm = () => {
     const [userDetail, setUserDetail] = useState({
@@ -57,4 +79,8 @@ const invalidSignIn = email === '' || password === ''
     )
 }
 
-export default SigninPage
+
+export {FreelancerSignin}
+export {ClientSignin}
+
+// export default SigninPage
