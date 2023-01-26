@@ -2,30 +2,24 @@ import React, {useState} from 'react'
 import {City, Country, State} from "country-state-city"
 import Select from 'react-select'
 
-const CSC = () => {
-  const [cscData, setcscData] = useState({
-    country: '',
-    countryCode: '',
-    state: '',
-    stateCode: '',
-    city: ''
-  })
+const CSC = (props) => {
   const updatedCountries = Country.getAllCountries().map(country => ({
         label: country.name,
-        values: country.isoCode,
+        value: country.isoCode,
     }))
     const filteredStates = State.getAllStates().filter(state=>(
-        state.countryCode == cscData.countryCode
+        state.countryCode == props.frSignUpData.countryCode
      ))
     const updatedStates = filteredStates.map(state=>({
        label: state.name,
-       values: state.isoCode,
+       value: state.isoCode,
     }))
   const filteredCities = City.getAllCities().filter(city=>(
-     city.stateCode == cscData.stateCode
+     city.stateCode == props.frSignUpData.stateCode
   ))
   const updatedCities = filteredCities.map(city=>({
      label: city.name,
+     value: city.name
   }))
 
   return (
@@ -34,7 +28,7 @@ const CSC = () => {
         <Select 
           name='country'
           placeholder='Choose your Country'
-          value={cscData.country}
+          // value={props.frSignUpData.country}
           options={updatedCountries}
           onChange={(e, name) => handleChange(e, name)}
         />
@@ -43,7 +37,6 @@ const CSC = () => {
         <Select 
           name='state'
           placeholder='Choose your State'
-          value={cscData.state}
           options={updatedStates}
           onChange={(e, name) => handleChange(e, name)}
         />
@@ -52,18 +45,16 @@ const CSC = () => {
         <Select 
           name='city'
           placeholder='Choose your city'
-          value={cscData.city}
           options={updatedCities}
           onChange={(e, name) => handleChange(e, name)}
         />
     </>
   )
 
-
   function handleChange(e, name) {
-     setcscData(prevData => ({...prevData, [name.name]: e.label}))
+    props.setFrSignUpData(prevData => ({...prevData, [name.name]: e.label}))
      if(name.name!='city')
-      setcscData(prevData => ({...prevData, [name.name+"Code"]: e.values}))
+     props.setFrSignUpData(prevData => ({...prevData, [name.name+"Code"]: e.value}))
   }
 }
 
